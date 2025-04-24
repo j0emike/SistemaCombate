@@ -23,7 +23,7 @@ public:
         perderVida = 0;
         salud -= perderVida;
         if (salud < 0) salud = 0;
-        std::cout << nombre << " recibió " << danioReal << " de daño. Salud restante: " << salud << std::endl;
+        std::cout << nombre << " recibio " << perderVida << " de daño. Salud restante: " << salud << std::endl;
     }
 
     void mostrarEstadisticas(){
@@ -48,7 +48,7 @@ int main() {
     Personaje jugador("Jugador");
     Personaje npc("NPC");
 
-    std::cout << "=== Estadísticas previas al combate ===" << std::endl;
+    std::cout << "=== Estadisticas previas al combate ===" << std::endl;
     jugador.mostrarEstadisticas();
     npc.mostrarEstadisticas();
 
@@ -56,13 +56,13 @@ int main() {
 
     // Turno del jugador
     std::cout << jugador.getNombre() << " ataca a " << npc.getNombre() << std::endl;
-    npc.recibirDanio(jugador.getAtaque());
+    npc.perderVida(jugador.getAtaque());
 
     // Turno del NPC
     std::cout << npc.getNombre() << " ataca a " << jugador.getNombre() << std::endl;
-    jugador.recibirDanio(npc.getAtaque());
+    jugador.perderVida(npc.getAtaque());
 
-    std::cout << "\n=== Estadísticas después del combate ===" << std::endl;
+    std::cout << "\n=== Estadisticas despues del combate ===" << std::endl;
     jugador.mostrarEstadisticas();
     npc.mostrarEstadisticas();
 
