@@ -12,15 +12,13 @@
 class Personaje {
 public:
     Personaje(std::string nombre) : nombre(nombre) {
-        salud = rand() % 51 + 50;   // 50 - 100
-        ataque = rand() % 21 + 10;  // 10 - 30
-        defensa = rand() % 21 + 5;  // 5 - 25
+        salud = rand() % 51 + 50;
+        ataque = rand() % 21 + 10;
+        defensa = rand() % 21 + 5;
     }
 
     void perderVida(int danio) {
         int perderVida = danio - defensa;
-        if (perderVida < 0)
-        perderVida = 0;
         salud -= perderVida;
         if (salud < 0) salud = 0;
         std::cout << nombre << " recibio " << perderVida << " de daño. Salud restante: " << salud << std::endl;
@@ -53,18 +51,22 @@ int main() {
     npc.mostrarEstadisticas();
 
     std::cout << "\n=== Combate ===" << std::endl;
+    
+    while ((jugador.getSalud()>=0 || npc.getSalud()>=0)) {
+        // Turno del jugador
+        std::cout << jugador.getNombre() << " ataca a " << npc.getNombre() << std::endl;
+        npc.perderVida(jugador.getAtaque());
 
-    // Turno del jugador
-    std::cout << jugador.getNombre() << " ataca a " << npc.getNombre() << std::endl;
-    npc.perderVida(jugador.getAtaque());
+        // Turno del NPC
+        std::cout << npc.getNombre() << " ataca a " << jugador.getNombre() << std::endl;
+        jugador.perderVida(npc.getAtaque());
 
-    // Turno del NPC
-    std::cout << npc.getNombre() << " ataca a " << jugador.getNombre() << std::endl;
-    jugador.perderVida(npc.getAtaque());
+        std::cout << "\n=== Estadisticas despues del combate ===" << std::endl;
+        jugador.mostrarEstadisticas();
+        npc.mostrarEstadisticas();
+    };
 
-    std::cout << "\n=== Estadisticas despues del combate ===" << std::endl;
-    jugador.mostrarEstadisticas();
-    npc.mostrarEstadisticas();
+    
 
     return 0;
 }
