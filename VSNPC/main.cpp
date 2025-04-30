@@ -71,20 +71,18 @@ int main() {
 
     std::cout << "\n=== Combate ===" << std::endl;
     while (jugador.getSalud() > 0 && npc.getSalud() > 0) {
-        while (jugador.getSalud() > 0 && npc.getSalud() > 0) {
 
-            turno(jugador, npc);
-            if (npc.getSalud() <= 0) break;
+        turno(jugador, npc);
+        if (npc.getSalud() <= 0) break;
 
-            turno(npc, jugador);
-            if (jugador.getSalud() <= 0) break;
+        turno(npc, jugador);
+        if (jugador.getSalud() <= 0) break;
 
-            std::cout << "\n=== Estadísticas después del turno ===" << std::endl;
-            jugador.mostrarEstadisticas();
-            npc.mostrarEstadisticas();
-            system("pause");
-            system("cls");
-        }
+        std::cout << "\n=== Estadísticas después del turno ===" << std::endl;
+        jugador.mostrarEstadisticas();
+        npc.mostrarEstadisticas();
+        system("pause");
+        system("cls");
     }
     
     std::cout << "\n=== Fin del combate ===" << std::endl;
